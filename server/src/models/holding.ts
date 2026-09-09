@@ -17,6 +17,7 @@ export interface IStock extends Document {
   exchangeCode: string;
   exchange: Exchange;
   sector: Sector;
+  yahooSymbol?: string | null;
 }
 
 const stockSchema = new Schema<IStock>(
@@ -56,6 +57,11 @@ const stockSchema = new Schema<IStock>(
       type: String,
       required: true,
       enum: ["Financial", "Tech", "Consumer", "Power", "Pipe", "Others"],
+    },
+    yahooSymbol: {
+      type: String,
+      default: null,
+      trim: true,
     },
   },
   {

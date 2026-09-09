@@ -10,6 +10,7 @@ const holdings = [
     exchangeCode: "HDFCBANK",
     exchange: "NSE",
     sector: "Financial",
+    yahooSymbol: "HDFCBANK.NS",
   },
   {
     name: "Bajaj Finance",
@@ -18,6 +19,7 @@ const holdings = [
     exchangeCode: "BAJFINANCE",
     exchange: "NSE",
     sector: "Financial",
+    yahooSymbol: "BAJFINANCE.NS",
   },
   {
     name: "ICICI Bank",
@@ -26,6 +28,7 @@ const holdings = [
     exchangeCode: "532174",
     exchange: "BSE",
     sector: "Financial",
+    yahooSymbol: "ICICIBANK.NS",
   },
   {
     name: "Bajaj Housing",
@@ -34,6 +37,7 @@ const holdings = [
     exchangeCode: "544252",
     exchange: "BSE",
     sector: "Financial",
+    yahooSymbol: "BAJAJHFL.NS",
   },
   {
     name: "Savani Financials",
@@ -42,6 +46,7 @@ const holdings = [
     exchangeCode: "511577",
     exchange: "BSE",
     sector: "Financial",
+    yahooSymbol: "511577.BO",
   },
   {
     name: "Affle India",
@@ -50,6 +55,7 @@ const holdings = [
     exchangeCode: "AFFLE",
     exchange: "NSE",
     sector: "Tech",
+    yahooSymbol: "AFFLE.NS",
   },
   {
     name: "LTI Mindtree",
@@ -58,6 +64,7 @@ const holdings = [
     exchangeCode: "LTIM",
     exchange: "NSE",
     sector: "Tech",
+    yahooSymbol: null,
   },
   {
     name: "KPIT Tech",
@@ -66,6 +73,7 @@ const holdings = [
     exchangeCode: "542651",
     exchange: "BSE",
     sector: "Tech",
+    yahooSymbol: "KPITTECH.NS",
   },
   {
     name: "Tata Tech",
@@ -74,6 +82,7 @@ const holdings = [
     exchangeCode: "544028",
     exchange: "BSE",
     sector: "Tech",
+    yahooSymbol: "TATATECH.NS",
   },
   {
     name: "BLS E-Services",
@@ -82,6 +91,7 @@ const holdings = [
     exchangeCode: "544107",
     exchange: "BSE",
     sector: "Tech",
+    yahooSymbol: "BLSE.NS",
   },
   {
     name: "Tanla",
@@ -90,6 +100,7 @@ const holdings = [
     exchangeCode: "532790",
     exchange: "BSE",
     sector: "Tech",
+    yahooSymbol: "TANLA.NS",
   },
   {
     name: "Dmart",
@@ -98,6 +109,7 @@ const holdings = [
     exchangeCode: "DMART",
     exchange: "NSE",
     sector: "Consumer",
+    yahooSymbol: "DMART.NS",
   },
   {
     name: "Tata Consumer",
@@ -106,6 +118,7 @@ const holdings = [
     exchangeCode: "532540",
     exchange: "BSE",
     sector: "Consumer",
+    yahooSymbol: "TATACONSUM.NS",
   },
   {
     name: "Pidilite",
@@ -114,6 +127,7 @@ const holdings = [
     exchangeCode: "500331",
     exchange: "BSE",
     sector: "Consumer",
+    yahooSymbol: "PIDILITIND.NS",
   },
   {
     name: "Tata Power",
@@ -122,6 +136,7 @@ const holdings = [
     exchangeCode: "500400",
     exchange: "BSE",
     sector: "Power",
+    yahooSymbol: "TATAPOWER.NS",
   },
   {
     name: "KPI Green",
@@ -130,6 +145,7 @@ const holdings = [
     exchangeCode: "542323",
     exchange: "BSE",
     sector: "Power",
+    yahooSymbol: "KPIGREEN.NS",
   },
   {
     name: "Suzlon",
@@ -138,6 +154,7 @@ const holdings = [
     exchangeCode: "532667",
     exchange: "BSE",
     sector: "Power",
+    yahooSymbol: "SUZLON.NS",
   },
   {
     name: "Gensol",
@@ -146,6 +163,7 @@ const holdings = [
     exchangeCode: "542851",
     exchange: "BSE",
     sector: "Power",
+    yahooSymbol: "GENSOL.NS",
   },
   {
     name: "Hariom Pipes",
@@ -154,6 +172,7 @@ const holdings = [
     exchangeCode: "543517",
     exchange: "BSE",
     sector: "Pipe",
+    yahooSymbol: "HARIOMPIPE.NS",
   },
   {
     name: "Astral",
@@ -162,6 +181,7 @@ const holdings = [
     exchangeCode: "ASTRAL",
     exchange: "NSE",
     sector: "Pipe",
+    yahooSymbol: "ASTRAL.NS",
   },
   {
     name: "Polycab",
@@ -170,6 +190,7 @@ const holdings = [
     exchangeCode: "542652",
     exchange: "BSE",
     sector: "Pipe",
+    yahooSymbol: "POLYCAB.NS",
   },
   {
     name: "Clean Science",
@@ -178,6 +199,7 @@ const holdings = [
     exchangeCode: "543318",
     exchange: "BSE",
     sector: "Others",
+    yahooSymbol: "CLEAN.NS",
   },
   {
     name: "Deepak Nitrite",
@@ -186,6 +208,7 @@ const holdings = [
     exchangeCode: "506401",
     exchange: "BSE",
     sector: "Others",
+    yahooSymbol: "DEEPAKNTR.NS",
   },
   {
     name: "Fine Organic",
@@ -194,6 +217,7 @@ const holdings = [
     exchangeCode: "541557",
     exchange: "BSE",
     sector: "Others",
+    yahooSymbol: "FINEORG.NS",
   },
   {
     name: "Gravita",
@@ -202,6 +226,7 @@ const holdings = [
     exchangeCode: "533282",
     exchange: "BSE",
     sector: "Others",
+    yahooSymbol: "GRAVITA.NS",
   },
   {
     name: "SBI Life",
@@ -210,6 +235,7 @@ const holdings = [
     exchangeCode: "540719",
     exchange: "BSE",
     sector: "Others",
+    yahooSymbol: "SBILIFE.NS",
   },
 ];
 
