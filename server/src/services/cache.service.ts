@@ -2,12 +2,8 @@ import redisClient from "../config/redis";
 
 const DEFAULT_TTL = 15;
 
-const isReady = (): boolean => {
-  return redisClient.isReady;
-};
-
 export const getCache = async <T>(key: string): Promise<T | null> => {
-  if (!isReady()) {
+  if (!redisClient?.isReady) {
     return null;
   }
 
@@ -31,7 +27,7 @@ export const setCache = async <T>(
   data: T,
   ttl = DEFAULT_TTL,
 ): Promise<void> => {
-  if (!isReady()) {
+  if (!redisClient?.isReady) {
     return;
   }
 
