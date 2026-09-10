@@ -1,7 +1,5 @@
 import { createClient } from "redis";
 
-type RedisClient = ReturnType<typeof createClient>;
-
 const MAX_RETRY_DELAY = 5000;
 
 const MAX_RECONNECT_ATTEMPTS = 20;
@@ -12,7 +10,7 @@ const redisUrl = process.env.REDIS_URL;
 
 let hasLoggedError = false;
 
-const buildClient = (url: string): RedisClient => {
+const buildClient = (url: string) => {
   const client = createClient({
     url,
     socket: {
