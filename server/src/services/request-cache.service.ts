@@ -1,14 +1,10 @@
-const pendingRequests = new Map<
-  string,
-  Promise<unknown>
->();
+const pendingRequests = new Map<string, Promise<unknown>>();
 
 export const getOrCreateRequest = async <T>(
   key: string,
   request: () => Promise<T>,
 ): Promise<T> => {
-  const existingRequest =
-    pendingRequests.get(key);
+  const existingRequest = pendingRequests.get(key);
 
   if (existingRequest) {
     return existingRequest as Promise<T>;
@@ -16,10 +12,7 @@ export const getOrCreateRequest = async <T>(
 
   const newRequest = request();
 
-  pendingRequests.set(
-    key,
-    newRequest,
-  );
+  pendingRequests.set(key, newRequest);
 
   try {
     return await newRequest;

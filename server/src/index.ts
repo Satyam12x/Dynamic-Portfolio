@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 import portfolioRoutes from "./routes/portfolio";
 import redisClient from "./config/redis";
-import { errorHandler } from "./middlewares/errorHandler";
+import { errorHandler, notFound } from "./middlewares/errorHandler";
 
 const app = express();
 
@@ -35,13 +35,18 @@ app.get("/api/health", (_req, res) => {
 
 app.use("/api/portfolio", portfolioRoutes);
 
+app.use(notFound);
+
 app.use(errorHandler);
 
 const startServer = async () => {
   try {
-    await redisClient.connect();
+    try {
+      await redisClient.connect();
 
-    console.log("Redis connected");
+      console.log("Redis connected");
+    } catch {
+    }
 
     await mongoose.connect(dbLink);
 

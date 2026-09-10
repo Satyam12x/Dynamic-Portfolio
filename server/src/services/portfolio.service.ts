@@ -1,10 +1,14 @@
 import Stock from "../models/holding";
 
-import { getCache, setCache } from "./cache.services";
+import { getCache, setCache } from "./cache.service";
 
-import { getBatchPrices } from "./yahoo.services";
+import { getBatchQuotes, QuoteData } from "./yahoo.service";
 
-import { getBatchGoogleFinance, GoogleFinanceData } from "./google.services";
+import {
+  getBatchGoogleFinance,
+  buildGoogleSymbol,
+  GoogleFinanceData,
+} from "./google.service";
 
 import { getOrCreateRequest } from "./request-cache.service";
 
@@ -35,7 +39,8 @@ type PortfolioHolding = {
   presentValue: number | null;
   gainLoss: number | null;
   peRatio: number | null;
-  latestEarnings: GoogleFinanceData["latestEarnings"];
+  latestEarnings: number | null;
+  earningsDate: string | null;
   sector: HoldingData["sector"];
 };
 
@@ -61,13 +66,9 @@ type PortfolioData = {
   sectors: SectorData[];
 };
 
-const getGoogleKey = (exchange: string, exchangeCode: string): string => {
-  return `${exchange}:${exchangeCode}`;
-};
-
 const buildPortfolio = (
   holdings: HoldingData[],
-  priceMap: Map<string, number>,
+  quoteMap: Map<string, QuoteData>,
   googleMap: Map<string, GoogleFinanceData>,
 ): PortfolioData => {
   let totalInvestment = 0;
@@ -77,20 +78,20 @@ const buildPortfolio = (
 
     totalInvestment += investment;
 
-    const cmp = holding.yahooSymbol
-      ? (priceMap.get(holding.yahooSymbol) ?? null)
+    const quote = holding.yahooSymbol
+      ? (quoteMap.get(holding.yahooSymbol) ?? null)
       : null;
+
+    const cmp = quote?.price ?? null;
+
+    const google =
+      googleMap.get(
+        buildGoogleSymbol(holding.exchangeCode, holding.exchange),
+      ) ?? null;
 
     const presentValue = cmp === null ? null : cmp * holding.quantity;
 
     const gainLoss = presentValue === null ? null : presentValue - investment;
-
-    const googleKey = getGoogleKey(holding.exchange, holding.exchangeCode);
-
-    const googleData = googleMap.get(googleKey) ?? {
-      peRatio: null,
-      latestEarnings: null,
-    };
 
     return {
       name: holding.name,
@@ -115,9 +116,11 @@ const buildPortfolio = (
 
       gainLoss,
 
-      peRatio: googleData.peRatio,
+      peRatio: google?.peRatio ?? quote?.peRatio ?? null,
 
-      latestEarnings: googleData.latestEarnings,
+      latestEarnings: google?.latestEarnings ?? quote?.latestEarnings ?? null,
+
+      earningsDate: google?.earningsDate ?? quote?.earningsDate ?? null,
 
       sector: holding.sector,
     };
@@ -245,8 +248,8 @@ export const getPortfolioData = async (): Promise<PortfolioData> => {
           typeof symbol === "string" && symbol.trim().length > 0,
       );
 
-    const [priceMap, googleMap] = await Promise.all([
-      getBatchPrices(symbols),
+    const [quoteMap, googleMap] = await Promise.all([
+      getBatchQuotes(symbols),
 
       getBatchGoogleFinance(
         holdings.map((holding) => ({
@@ -257,7 +260,7 @@ export const getPortfolioData = async (): Promise<PortfolioData> => {
       ),
     ]);
 
-    const portfolio = buildPortfolio(holdings, priceMap, googleMap);
+    const portfolio = buildPortfolio(holdings, quoteMap, googleMap);
 
     await setCache(PORTFOLIO_CACHE_KEY, portfolio, PORTFOLIO_CACHE_TTL);
 
